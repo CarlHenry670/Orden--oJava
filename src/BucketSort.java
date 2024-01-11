@@ -29,7 +29,14 @@ public class BucketSort {
                 case "Insertion Sort":
                     Dados.insertionSort(balde);
                     break;
-                // Adicione outros casos conforme necessário
+                case "Merge Sort":
+                    Dados.mergeSort(balde);
+                    break;
+                case "Quick Sort":
+                    Dados.quickSort(balde);
+                    break;
+                    case "Counting Sort":
+                    Dados.countingSort(balde);
             }
         }
 
@@ -43,13 +50,15 @@ public class BucketSort {
     }
 
     public static void main(String[] args) {
-        int tamanhoLista = 2000;
+        int tamanhoLista = 200000;
         List<Integer> numerosNaoOrdenados = PreencherAleatorio.criarLista(tamanhoLista);
 
         testarOrdenacaoBucketSort("Bubble Sort", new ArrayList<>(numerosNaoOrdenados), "bubblesor");
         testarOrdenacaoBucketSort("Selection Sort", new ArrayList<>(numerosNaoOrdenados), "Selection Sort");
         testarOrdenacaoBucketSort("Insertion Sort", new ArrayList<>(numerosNaoOrdenados), "Insertion Sort");
-        // Adicione outros testes conforme necessário
+        testarOrdenacaoBucketSort("Merge Sort", new ArrayList<>(numerosNaoOrdenados), "Merge Sort");
+        testarOrdenacaoBucketSort("Quick Sort", new ArrayList<>(numerosNaoOrdenados), "Quick Sort");
+        testarOrdenacaoBucketSort("Counting Sort", new ArrayList<>(numerosNaoOrdenados), "Counting Sort");
     }
 
     private static void testarOrdenacaoBucketSort(String metodo, List<Integer> numeros, String metodoInterno) {
@@ -59,9 +68,7 @@ public class BucketSort {
         List<Integer> listaOrdenada = BucketSort.bucketSort(numeros, metodoInterno);
 
         long tempoDecorrido = cronometro.parar();
-
         System.out.println("Método de ordenação: Bucket Sort (" + metodo + ")");
-
         System.out.println("Tempo decorrido: " + cronometro.obterTempo(tempoDecorrido));
         System.out.println("******************************************************");
     }

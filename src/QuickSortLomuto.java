@@ -4,12 +4,16 @@ public class QuickSortLomuto {
 
     public static int quickSort(List<Integer> lista, int inicio, int fim) {
         if (inicio < fim) {
-            int indiceParticao = particionarLomuto(lista, inicio, fim);
+            int resultado = particionarLomuto(lista, inicio, fim);
 
-            quickSort(lista, inicio, indiceParticao - 1);
-            quickSort(lista, indiceParticao + 1, fim);
+            int trocas = resultado - inicio;
+
+            trocas += quickSort(lista, inicio, resultado - 1);
+            trocas += quickSort(lista, resultado + 1, fim);
+
+            return trocas;
         }
-        return fim;
+        return 0;
     }
 
     private static int particionarLomuto(List<Integer> lista, int inicio, int fim) {

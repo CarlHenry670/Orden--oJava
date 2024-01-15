@@ -4,18 +4,24 @@ public class QuickSortHoare {
 
     public static int quickSort(List<Integer> lista, int inicio, int fim) {
         if (inicio < fim) {
-            int indiceParticao = particionarHoare(lista, inicio, fim);
+            int[] resultado = particionarHoare(lista, inicio, fim);
 
-            quickSort(lista, inicio, indiceParticao);
-            quickSort(lista, indiceParticao + 1, fim);
+            int indiceParticao = resultado[0];
+            int trocas = resultado[1];
+
+            trocas += quickSort(lista, inicio, indiceParticao);
+            trocas += quickSort(lista, indiceParticao + 1, fim);
+
+            return trocas;
         }
-        return fim;
+        return 0;
     }
 
-    private static int particionarHoare(List<Integer> lista, int inicio, int fim) {
+    private static int[] particionarHoare(List<Integer> lista, int inicio, int fim) {
         int pivo = lista.get(inicio);
         int i = inicio - 1;
         int j = fim + 1;
+        int trocas = 0;
 
         while (true) {
             do {
@@ -27,10 +33,12 @@ public class QuickSortHoare {
             } while (lista.get(j) > pivo);
 
             if (i >= j) {
-                return j;
+                int[] resultado = { j, trocas };
+                return resultado;
             }
 
             trocarElementos(lista, i, j);
+            trocas++;
         }
     }
 
@@ -40,4 +48,3 @@ public class QuickSortHoare {
         lista.set(indice2, temp);
     }
 }
-
